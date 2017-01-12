@@ -1,0 +1,170 @@
+
+#Arab Spring
+news_event = {
+id = news.54
+	title = news.54.t
+	desc = news.54.d
+	picture = GFX_news_event_arab_spring
+
+	is_triggered_only = yes
+	major = yes
+
+	option = { #Inspiring
+		name = news.54.o1
+		trigger = {
+			or = {
+			has_government = islamist
+			has_government = conservative
+			has_government = market_liberal
+			has_government = social_liberal
+			has_government = social_democrat
+			has_government = progressive
+			has_government = democratic_socialist
+			}
+		}
+	}
+	option = { #Worrisome
+		name = news.54.o2
+		trigger = {
+			or = {
+			has_government = fascist
+			has_government = nationalist
+			has_government = reactionary
+			has_government = communist
+			has_government = monarchist
+			}
+		}
+	}
+}
+
+#Arab Spring Protests Suppressed
+news_event = {
+id = news.55
+	title = news.55.t
+	desc = news.55.d
+	picture = GFX_news_event_arab_spring_protesters_arrested
+
+	is_triggered_only = yes
+	major = yes
+
+	option = { #Disappointing
+		name = news.55.o1
+		trigger = {
+			or = {
+			has_government = islamist
+			has_government = conservative
+			has_government = market_liberal
+			has_government = social_liberal
+			has_government = social_democrat
+			has_government = progressive
+			has_government = democratic_socialist
+			}
+		}
+	}
+	option = { #Good
+		name = news.55.o2
+		trigger = {
+			or = {
+			has_government = fascist
+			has_government = nationalist
+			has_government = reactionary
+			has_government = communist
+			has_government = monarchist
+			}
+		}
+	}
+}
+
+#Arab Spring Military Coup
+news_event = {
+id = news.56
+	title = news.56.t
+	desc = news.56.d
+	picture = GFX_news_event_arab_spring_coup
+
+	is_triggered_only = yes
+	major = yes
+
+	option = { #Interesting
+		name = news.56.o1
+		trigger = {
+			or = {
+			has_government = conservative
+			has_government = market_liberal
+			has_government = social_liberal
+			has_government = social_democrat
+			has_government = progressive
+			has_government = democratic_socialist
+			}
+		}
+	}
+	option = { #That can't happen here?
+		name = news.56.o2
+		trigger = {
+			or = {
+			has_government = islamist
+			has_government = fascist
+			has_government = nationalist
+			has_government = reactionary
+			has_government = communist
+			has_government = monarchist
+			}
+		}
+	}
+}
+
+#Arab Spring Regime Backs Down
+news_event = {
+id = news.57
+	title = news.57.t
+	desc = news.57.d
+	picture = GFX_news_event_arab_spring
+
+	is_triggered_only = yes
+	major = yes
+
+	option = { #Inspiring
+		name = news.57.o1
+		trigger = {
+			or = {
+			has_government = conservative
+			has_government = market_liberal
+			has_government = social_liberal
+			has_government = social_democrat
+			has_government = progressive
+			has_government = democratic_socialist
+			}
+		}
+	}
+	option = { #Worrisome
+		name = news.57.o2
+		trigger = {
+			or = {
+			has_government = islamist
+			has_government = fascist
+			has_government = nationalist
+			has_government = reactionary
+			has_government = communist
+			has_government = monarchist
+			}
+		}
+	}
+}
+
+
+news.54.t:0 "The Arab Spring"
+news.54.d:0 "[From.GetName] is being swept by a political movement opposed to the current regime; composed of young dissidents, they demand greater democracy and civil liberties. They're joined by opposition parties, Islamist groups, and workers angered by percieved state corruption. The demonstrators have seized the main streets and public spaces of [From.GetName]'s largest cities, demanding that [From.From.GetLeader] step down and allow free elections."
+news.54.o1:0 "An inspiring stand for freedom."
+news.54.o2:0 "A worrisome event."
+news.56.t:0 "Arab Spring Protests Suppressed"
+news.56.d:0 "[From.GetAdjective] police and military forces descended on the largest Arab Spring protest site in the country's capital, beinging an end to [From.GetName]'s Revolution.
+news.56.o1:0 "How disappointing!"
+news.56.o2:0 "Order is restored."
+news.56.t:0 "Coup in [From.GetName]"
+news.56.d:0 "[From.GetName]'s army launched a coup d'etat against the [From.GetAdjective] Regime today, hoping to bring an end to internal unrest and put a popularly-baced government in power."
+news.56.o1:0 "An interesting development."
+news.56.o2:0 "That can't happen here, right?"
+news.57.t:0 "[From.From.GetLeader] Backs Down in [From.GetName]"
+news.57.d:0 "Under intense pressure from Arab Spring revolutionaries the [From.GetAdjective] Regime collapsed today, with opposition groups forming a new government."
+news.57.o1:0 "Wonderful!"
+news.57.o2:0 "Troublesome."

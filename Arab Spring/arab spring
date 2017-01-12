@@ -1,0 +1,490 @@
+add_namespace = arab_spring
+
+#Arab Spring Protests
+country_event = {
+	id = arab_spring.1
+	title = arab_spring.1.t
+	desc = arab_spring.1.d
+	picture = GFX_report_event_arab_spring
+
+	trigger = {
+				date > 2010.1.1
+				date < 2015.1.1
+				has_country_flag = sunni_islam
+				or = { has_government = reactionary
+					   has_government = nationalist
+					   has_government = fascist }
+				not = { has_idea = idea_arab_spring }
+		}
+
+	mean_time_to_happen = {
+	days = 365
+
+	modifier = {
+		factor = 0.15
+		any_neighbor_country = { has_idea = idea_arab_spring }
+	}
+	modifier = {
+		factor = 0.9
+		tag = TUN
+	}
+	}
+
+	immediate = {
+		add_timed_idea = { idea = idea_arab_spring days = 365 }
+		news_event = { hours = 6 id = news.54 }
+	}
+
+	option = { #crackdown
+	name = arab_spring.1.o1
+	hidden_effect = {
+	random_list = { 
+	15 = { country_event = { id = arab_spring.2 days = 7 }} #suppressed
+	40 = { country_event = { id = arab_spring.3 days = 7 }} #protests
+	35 = { country_event = { id = arab_spring.4 days = 7 }} #riots
+	10 = { country_event = { id = arab_spring.5 days = 7 }} #coup
+	}
+	}
+	add_political_power = -25
+	add_national_unity = -0.10
+	ai_chance = { factor = 50 }
+	}
+
+	option = { #ignore
+	name = arab_spring.1.o2
+	hidden_effect = {
+	random_list = { 
+	65 = { country_event = { id = arab_spring.3 days = 7 }} #protests
+	35 = { country_event = { id = arab_spring.4 days = 7 }} #riots
+	}
+	}
+	add_national_unity = -0.05
+	ai_chance = { factor = 35 }
+	}
+
+	option = { #negotiate
+	name = arab_spring.1.o3
+	hidden_effect = {
+	random_list = { 
+	5 = { country_event = { id = arab_spring.7 days = 7 }} #demandelections
+	15 = { country_event = { id = arab_spring.8 days = 7 }} #electionsandliberalization
+	80 = { country_event = { id = arab_spring.9 days = 7 }} #demandregimechange
+	}
+	}
+	add_political_power = -75
+	ai_chance = { factor = 10 }
+	}
+
+	option = { #stepdown
+	name = arab_spring.1.o4
+	hidden_effect = {
+	random_list = { 
+	30 = { set_politics = { ruling_party = islamist elections_allowed = yes } add_popularity = { ideology = islamist popularity = 0.10 } }
+	25 = { set_politics = { ruling_party = conservative elections_allowed = yes } add_popularity = { ideology = conservative popularity = 0.10 } }
+	30 = { set_politics = { ruling_party = social_liberal elections_allowed = yes } add_popularity = { ideology = social_liberal popularity = 0.10 } }
+	10 = { set_politics = { ruling_party = social_democrat elections_allowed = yes } add_popularity = { ideology = social_democrat popularity = 0.10 } }
+	3 = { set_politics = { ruling_party = progressive elections_allowed = yes } add_popularity = { ideology = progressive popularity = 0.10 } }
+	2 = { set_politics = { ruling_party = democratic_socialist elections_allowed = yes } add_popularity = { ideology = democratic_socialist popularity = 0.10 } }
+	}
+		remove_ideas = idea_nationwide_protests
+		remove_ideas = idea_rioting
+	}
+	ai_chance = { factor = 5 }
+	news_event = { hours = 6 id = news.57 }
+	}
+}
+
+#Protests Suppressed
+country_event = {
+	id = arab_spring.2
+	title = arab_spring.2.t
+	desc = arab_spring.2.d
+	picture = GFX_report_event_arab_spring_protesters_arrested
+
+	is_triggered_only = yes
+
+	immediate = {
+		remove_ideas = idea_arab_spring
+		remove_ideas = idea_nationwide_protests
+		remove_ideas = idea_rioting
+		news_event = { hours = 6 id = news.55 }
+	}
+
+	option = { #excellent
+	name = arab_spring.2.o1
+	add_popularity = {
+			ideology = islamist
+			popularity = -0.02
+		}
+	add_popularity = {
+			ideology = conservative
+			popularity = -0.01
+		}
+	add_popularity = {
+			ideology = social_liberal
+			popularity = -0.02
+		}
+	}
+	add_popularity = {
+			ideology = social_democrat
+			popularity = -0.01
+		}
+	add_manpower = -1500
+}
+
+#Protests Spread
+country_event = {
+	id = arab_spring.3
+	title = arab_spring.3.t
+	desc = arab_spring.3.d
+	picture = GFX_report_event_arab_spring_protest
+
+	is_triggered_only = yes
+
+	immediate = {
+		add_timed_idea = { idea = idea_nationwide_protests days = 150 }
+	}
+
+	option = { #crackdown
+	name = arab_spring.3.o1 
+	hidden_effect = {
+	random_list = { 
+	15 = { country_event = { id = arab_spring.2 days = 7 }} #suppressed
+	60 = { country_event = { id = arab_spring.4 days = 7 }} #riots
+	10 = { country_event = { id = arab_spring.5 days = 7 }} #coup
+	15 = { country_event = { id = arab_spring.6 days = 7 }} #civilwar
+	}
+	}
+	add_political_power = -25
+	add_national_unity = -0.10
+	ai_chance = { factor = 50 }
+	}
+
+	option = { #negotiate
+	name = arab_spring.3.o2
+	hidden_effect = {
+	random_list = { 
+	20 = { country_event = { id = arab_spring.8 days = 7 }} #electionsandliberalization
+	80 = { country_event = { id = arab_spring.9 days = 7 }} #demandregimechange
+	}
+	}
+	add_political_power = -75
+	ai_chance = { factor = 40 }
+	}
+
+	option = { #stepdown
+	name = arab_spring.3.o3
+	hidden_effect = {
+	random_list = { 
+	30 = { set_politics = { ruling_party = islamist elections_allowed = yes } add_popularity = { ideology = islamist popularity = 0.10 } }
+	25 = { set_politics = { ruling_party = conservative elections_allowed = yes } add_popularity = { ideology = conservative popularity = 0.10 } }
+	30 = { set_politics = { ruling_party = social_liberal elections_allowed = yes } add_popularity = { ideology = social_liberal popularity = 0.10 } }
+	10 = { set_politics = { ruling_party = social_democrat elections_allowed = yes } add_popularity = { ideology = social_democrat popularity = 0.10 } }
+	3 = { set_politics = { ruling_party = progressive elections_allowed = yes } add_popularity = { ideology = progressive popularity = 0.10 } }
+	2 = { set_politics = { ruling_party = democratic_socialist elections_allowed = yes } add_popularity = { ideology = democratic_socialist popularity = 0.10 } }
+	}
+		remove_ideas = idea_nationwide_protests
+		remove_ideas = idea_rioting
+	}
+	ai_chance = { factor = 10 }
+	news_event = { hours = 6 id = news.57 }
+	}
+}
+
+#riots
+country_event = {
+	id = arab_spring.4
+	title = arab_spring.4.t
+	desc = arab_spring.4.d
+	picture = GFX_report_event_arab_spring_riots
+
+	is_triggered_only = yes
+
+	immediate = {
+		add_timed_idea = { idea = idea_nationwide_protests days = 150 }
+		add_timed_idea = { idea = idea_rioting days = 90 }
+	}
+
+	option = { #crackdown
+	name = arab_spring.4.o1 
+	hidden_effect = {
+	random_list = { 
+	5 = { country_event = { id = arab_spring.2 days = 7 }} #suppressed
+	15 = { country_event = { id = arab_spring.5 days = 7 }} #coup
+	80 = { country_event = { id = arab_spring.6 days = 7 }} #civilwar
+	}
+	}
+	add_political_power = -25
+	add_national_unity = -0.10
+	ai_chance = { factor = 50 }
+	}
+
+	option = { #negotiate
+	name = arab_spring.4.o2
+	hidden_effect = {
+	random_list = { 
+	10 = { country_event = { id = arab_spring.8 days = 7 }} #electionsandliberalization
+	90 = { country_event = { id = arab_spring.9 days = 7 }} #demandregimechange
+	}
+	}
+	add_political_power = -75
+	ai_chance = { factor = 35 }
+	}
+
+	option = { #stepdown
+	name = arab_spring.4.o3
+	hidden_effect = {
+	random_list = { 
+	30 = { set_politics = { ruling_party = islamist elections_allowed = yes } add_popularity = { ideology = islamist popularity = 0.10 } }
+	25 = { set_politics = { ruling_party = conservative elections_allowed = yes } add_popularity = { ideology = conservative popularity = 0.10 } }
+	30 = { set_politics = { ruling_party = social_liberal elections_allowed = yes } add_popularity = { ideology = social_liberal popularity = 0.10 } }
+	10 = { set_politics = { ruling_party = social_democrat elections_allowed = yes } add_popularity = { ideology = social_democrat popularity = 0.10 } }
+	3 = { set_politics = { ruling_party = progressive elections_allowed = yes } add_popularity = { ideology = progressive popularity = 0.10 } }
+	2 = { set_politics = { ruling_party = democratic_socialist elections_allowed = yes } add_popularity = { ideology = democratic_socialist popularity = 0.10 } }
+	}
+		remove_ideas = idea_nationwide_protests
+		remove_ideas = idea_rioting
+	}
+	ai_chance = { factor = 15 }
+	news_event = { hours = 6 id = news.57 }
+	}
+}
+
+#coup
+country_event = {
+	id = arab_spring.5
+	title = arab_spring.5.t
+	desc = arab_spring.5.d
+	picture = GFX_report_event_arab_spring_coup
+
+	is_triggered_only = yes
+
+	immediate = { news_event = { hours = 6 id = news.56 } }
+
+	option = { #islamicrepublic
+	name = arab_spring.5.o1
+	set_politics = { ruling_party = islamist elections_allowed = yes }
+	add_popularity = { ideology = islamist popularity = 0.10 }
+	remove_ideas = idea_rioting
+	ai_chance = { factor = 5 }
+	}
+
+	option = { #islamicdictatorship
+	name = arab_spring.5.o2
+	set_politics = { ruling_party = islamist elections_allowed = no }
+	add_popularity = { ideology = islamist popularity = 0.10 }
+	ai_chance = { factor = 10 }
+	}
+
+	option = { #conservative
+	name = arab_spring.5.o3
+	set_politics = { ruling_party = conservative elections_allowed = yes }
+	add_popularity = { ideology = conservative popularity = 0.10 }
+	remove_ideas = idea_rioting
+	ai_chance = { factor = 45 }
+	}
+
+	option = { #liberal
+	name = arab_spring.5.o4
+	set_politics = { ruling_party = social_liberal elections_allowed = yes }
+	add_popularity = { ideology = social_liberal popularity = 0.10 }
+	remove_ideas = idea_rioting
+	remove_ideas = idea_nationwide_protests
+	ai_chance = { factor = 30 }
+	}
+
+	option = { #social_democrat
+	name = arab_spring.5.o5
+	set_politics = { ruling_party = social_democrat elections_allowed = yes }
+	add_popularity = { ideology = social_democrat popularity = 0.10 }
+	remove_ideas = idea_rioting
+	remove_ideas = idea_nationwide_protests
+	ai_chance = { factor = 10 }
+	}
+}
+
+#civilwar
+country_event = {
+	id = arab_spring.6
+	title = arab_spring.6.t
+	desc = arab_spring.6.d
+	picture = GFX_report_event_arab_spring_civil_war
+
+	is_triggered_only = yes
+
+	option = { #So be it
+	hidden_effect = {
+	random_list = { 
+	15 = { start_civil_war = { ideology = islamist size = 0.5 } }
+	20 = { start_civil_war = { ideology = conservative size = 0.5 } }
+	20 = { start_civil_war = { ideology = social_liberal size = 0.5 } }
+	15 = { start_civil_war = { ideology = islamist size = 0.75 } }
+	15 = { start_civil_war = { ideology = conservative size = 0.75 } }
+	15 = { start_civil_war = { ideology = social_liberal size = 0.75 } }
+	}
+	}
+	}
+
+}
+
+#demandelections
+country_event = {
+	id = arab_spring.7
+	title = arab_spring.7.t
+	desc = arab_spring.7.d
+	picture = GFX_report_event_arab_spring_election
+
+	is_triggered_only = yes
+
+	option = { #accept
+	name = arab_spring.7.o1
+	set_politics = { elections_allowed = yes }
+	add_political_power = -10
+	remove_ideas = idea_rioting
+	ai_chance = { factor = 60 }
+	}
+
+	option = { #refuse
+	name = arab_spring.7.o2
+	hidden_effect = {
+	random_list = { 
+	10 = { country_event = { id = arab_spring.5 }} #coup
+	90 = { country_event = { id = arab_spring.6 }} #civilwar
+	}
+	}
+	add_national_unity = -0.10
+	ai_chance = { factor = 40 }
+	}
+}
+
+#demandelections+liberalization
+country_event = {
+	id = arab_spring.8
+	title = arab_spring.8.t
+	desc = arab_spring.8.d
+	picture = GFX_report_event_arab_spring_election
+
+	is_triggered_only = yes
+
+	option = { #accept
+	name = arab_spring.8.o1
+	set_politics = { elections_allowed = yes }
+	add_political_power = -10
+	remove_ideas = idea_rioting
+	add_timed_idea = { idea = idea_focus_generic_individual_freedom days = 365 }
+	ai_chance = { factor = 50 }
+	}
+
+	option = { #refuse
+	name = arab_spring.8.o2
+	hidden_effect = {
+	random_list = { 
+	10 = { country_event = { id = arab_spring.5 }} #coup
+	90 = { country_event = { id = arab_spring.6 }} #civilwar
+	}
+	}
+	add_national_unity = -0.10
+	ai_chance = { factor = 50 }
+	}
+}
+
+#demandregimechange
+country_event = {
+	id = arab_spring.9
+	title = arab_spring.9.t
+	desc = arab_spring.9.d
+	picture = GFX_report_event_arab_spring_protest
+
+	is_triggered_only = yes
+
+	option = {
+	name = arab_spring.9.o1
+	hidden_effect = {
+	random_list = { 
+	30 = { set_politics = { ruling_party = islamist elections_allowed = yes } add_popularity = { ideology = islamist popularity = 0.10 } }
+	25 = { set_politics = { ruling_party = conservative elections_allowed = yes } add_popularity = { ideology = conservative popularity = 0.10 } }
+	30 = { set_politics = { ruling_party = social_liberal elections_allowed = yes } add_popularity = { ideology = social_liberal popularity = 0.10 } }
+	10 = { set_politics = { ruling_party = social_democrat elections_allowed = yes } add_popularity = { ideology = social_democrat popularity = 0.10 } }
+	3 = { set_politics = { ruling_party = progressive elections_allowed = yes } add_popularity = { ideology = progressive popularity = 0.10 } }
+	2 = { set_politics = { ruling_party = democratic_socialist elections_allowed = yes } add_popularity = { ideology = democratic_socialist popularity = 0.10 } }
+	}
+		remove_ideas = idea_nationwide_protests
+		remove_ideas = idea_rioting
+	}
+	ai_chance = { factor = 20 }
+	news_event = { hours = 6 id = news.57 }
+	}
+
+	option = { #refuse
+	name = arab_spring.9.o2
+	hidden_effect = {
+	random_list = { 
+	10 = { country_event = { id = arab_spring.5 }} #coup
+	90 = { country_event = { id = arab_spring.6 }} #civilwar
+	}
+	}
+	add_national_unity = -0.10
+	ai_chance = { factor = 80 }
+	}
+}
+
+
+
+
+#Spread to Monarchies
+country_event = {
+	id = arab_spring.10
+	title = arab_spring.10.t
+	desc = arab_spring.10.d
+	picture = GFX_report_event_arab_spring
+
+	trigger = {
+				date > 2010.1.1
+				date < 2015.1.1
+				has_country_flag = sunni_islam
+				has_government = monarchist
+				not = { has_idea = idea_arab_spring }
+				any_neighbor_country = { has_idea = idea_arab_spring }
+		}
+	mean_time_to_happen = {
+	days = 600
+	}
+
+	immediate = {
+		add_timed_idea = { idea = idea_arab_spring days = 365 }
+	}
+
+	option = { #crackdown
+	name = arab_spring..o1
+	hidden_effect = {
+	random_list = { 
+	15 = { country_event = { id = arab_spring.2 days = 7 }} #suppressed
+	40 = { country_event = { id = arab_spring.3 days = 7 }} #protests
+	35 = { country_event = { id = arab_spring.4 days = 7 }} #riots
+	10 = { country_event = { id = arab_spring.5 days = 7 }} #coup
+	}
+	}
+	ai_chance = { factor = 80 }
+	}
+
+	option = { #ignore
+	name = arab_spring..o2
+	hidden_effect = {
+	random_list = { 
+	65 = { country_event = { id = arab_spring.3 days = 7 }} #protests
+	35 = { country_event = { id = arab_spring.4 days = 7 }} #riots
+	}
+	}
+	ai_chance = { factor = 15 }
+	}
+
+	option = { #negotiate
+	name = arab_spring..o3
+	hidden_effect = {
+	random_list = { 
+	5 = { country_event = { id = arab_spring.7 days = 7 }} #demandelections
+	15 = { country_event = { id = arab_spring.8 days = 7 }} #electionsandliberalization
+	80 = { country_event = { id = arab_spring.9 days = 7 }} #demandregimechange
+	}
+	ai_chance = { factor = 5 }
+	}
